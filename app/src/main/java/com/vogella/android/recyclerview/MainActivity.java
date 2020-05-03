@@ -6,12 +6,12 @@ import android.widget.Toast;
 
 
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,13 +27,13 @@ public class MainActivity <recyclerView> extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        showList();
+
         makeApiCall();
     }
 
 
 
-    private void showList() {
+    private void showList(List<Pokemon> pokemonList) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         // use this setting to
         // improve performance if you know that changes
@@ -41,13 +41,10 @@ public class MainActivity <recyclerView> extends Activity {
         // of the RecyclerView
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        List<String> input = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            input.add("Test" + i);
-        }
-        RecyclerView.Adapter<Adapter.ViewHolder> mAdapter = new Adapter(input);
+
+        Adapter mAdapter = new Adapter(pokemonList);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -70,7 +67,7 @@ public class MainActivity <recyclerView> extends Activity {
                 public void onResponse(Call<RestPokemonResponse> call, Response<RestPokemonResponse> response) {
                     if(response.isSuccessful() && response.body() != null) {
                             List<Pokemon> pokemonList = response.body().getResults();
-                        Toast.makeText(getApplicationContext(), "Api SUCCESS", Toast.LENGTH_SHORT).show();
+                        showList(pokemonList);
 
                     } else{
                         showError();
@@ -84,7 +81,9 @@ public class MainActivity <recyclerView> extends Activity {
             });
 
         }
-        private void showError(){
+        
+
+    private void showError(){
             Toast.makeText(getApplicationContext(), "Api ERROR", Toast.LENGTH_SHORT).show();
         }
 
