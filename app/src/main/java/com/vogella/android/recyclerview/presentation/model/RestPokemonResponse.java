@@ -10,14 +10,6 @@ public class RestPokemonResponse {
     public RestPokemonResponse() {
     }
 
-    public Integer getCount() {
-        return count;
-    }
-
-    public String getNext() {
-        return next;
-    }
-
     public List<Pokemon> getResults() {
         return results;
     }

@@ -47,7 +47,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public Adapter(List<Pokemon> myDataset) {
+    Adapter(List<Pokemon> myDataset) {
 
          values = myDataset;
     }
