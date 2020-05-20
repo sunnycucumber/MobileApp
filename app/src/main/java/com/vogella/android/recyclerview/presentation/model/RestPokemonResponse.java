@@ -1,4 +1,4 @@
-package com.vogella.android.recyclerview;
+package com.vogella.android.recyclerview.presentation.model;
 
 import java.util.List;
 

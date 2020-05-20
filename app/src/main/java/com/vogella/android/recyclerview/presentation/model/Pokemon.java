@@ -1,4 +1,4 @@
-package com.vogella.android.recyclerview;
+package com.vogella.android.recyclerview.presentation.model;
 
 public class Pokemon {
     private String name;

@@ -1,4 +1,4 @@
-package com.vogella.android.recyclerview;
+package com.vogella.android.recyclerview.presentation.model.view;
 
 import java.util.List;
 
@@ -6,12 +6,14 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.vogella.android.recyclerview.R;
+import com.vogella.android.recyclerview.presentation.model.Pokemon;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private List<Pokemon> values;

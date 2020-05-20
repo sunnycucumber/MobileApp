@@ -1,4 +1,4 @@
-package com.vogella.android.recyclerview;
+package com.vogella.android.recyclerview.presentation.model.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,15 +8,18 @@ import android.widget.Toast;
 
 
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.vogella.android.recyclerview.Constants;
+import com.vogella.android.recyclerview.R;
+import com.vogella.android.recyclerview.data.PokeApi;
+import com.vogella.android.recyclerview.presentation.model.Pokemon;
+import com.vogella.android.recyclerview.presentation.model.RestPokemonResponse;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

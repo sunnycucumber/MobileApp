@@ -1,8 +1,9 @@
-package com.vogella.android.recyclerview;
+package com.vogella.android.recyclerview.data;
+
+import com.vogella.android.recyclerview.presentation.model.RestPokemonResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 public interface PokeApi {
     @GET("/api/v2/pokemon")
