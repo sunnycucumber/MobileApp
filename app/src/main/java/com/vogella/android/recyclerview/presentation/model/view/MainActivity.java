@@ -5,13 +5,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
-
+import com.squareup.picasso.Picasso;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vogella.android.recyclerview.R;
+import com.vogella.android.recyclerview.Singletons;
 import com.vogella.android.recyclerview.presentation.model.Pokemon;
 import com.vogella.android.recyclerview.presentation.model.controller.MainController;
 
@@ -29,11 +30,10 @@ public class MainActivity <recyclerView> extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         controller = new MainController(
-                this,
-                new GsonBuilder()
-                        .setLenient()
-                        .create(),
-                 getSharedPreferences("application esiea", Context.MODE_PRIVATE)
+                 this,
+                Singletons.getGson(),
+                 Singletons.getSharedPreferences(getApplicationContext())
+
 );
         controller.onStart();
 
