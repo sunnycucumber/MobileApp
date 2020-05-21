@@ -3,7 +3,6 @@ package com.vogella.android.recyclerview.presentation.model.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -54,6 +53,8 @@ public class MainActivity <recyclerView> extends Activity {
         recyclerView.setLayoutManager(layoutManager);
 
 
+
+
          mAdapter = new Adapter(pokemonList, new Adapter.OnItemClickListener(){
              @Override
              public void onItemClick(Pokemon item) {
@@ -78,7 +79,7 @@ public class MainActivity <recyclerView> extends Activity {
         myIntent.putExtra("pokemonKey", Singletons.getGson().toJson(pokemon));
 
         MainActivity.this.startActivity(myIntent);
-
+        Toast.makeText(getApplicationContext(), "TODO NAVIGATE", Toast.LENGTH_SHORT).show();
 
     }
 }

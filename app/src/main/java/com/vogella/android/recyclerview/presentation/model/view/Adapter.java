@@ -48,12 +48,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    Adapter(List<Pokemon> myDataset, OnItemClickListener listener) {
+    public Adapter(List<Pokemon> myDataset, OnItemClickListener listener) {
 
          this.values = myDataset;
         this.listener = listener;
     }
 
+    public void setListener(OnItemClickListener listener){
+     this.listener = listener;
+    }
 
 
     // Create new views (invoked by the layout manager)

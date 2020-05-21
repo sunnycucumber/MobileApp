@@ -38,7 +38,7 @@ public class Singletons {
     }
     public static SharedPreferences getSharedPreferences(Context context) {
         if (sharedPreferencesInstance == null) {
-            sharedPreferencesInstance = context.getSharedPreferences("application_esiea", Context.MODE_PRIVATE);
+            sharedPreferencesInstance = context.getSharedPreferences("PokemonDex", Context.MODE_PRIVATE);
         }
         return sharedPreferencesInstance;
     }
