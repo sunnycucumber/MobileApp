@@ -17,10 +17,11 @@ import com.vogella.android.recyclerview.presentation.model.Pokemon;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private List<Pokemon> values;
+    private OnItemClickListener listener;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
+ public interface OnItemClickListener{
+     void onItemClick(Pokemon item);
+ }
     static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
          TextView txtHeader;
@@ -47,10 +48,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    Adapter(List<Pokemon> myDataset) {
+    Adapter(List<Pokemon> myDataset, OnItemClickListener listener) {
 
-         values = myDataset;
+         this.values = myDataset;
+        this.listener = listener;
     }
+
 
 
     // Create new views (invoked by the layout manager)
@@ -75,6 +78,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         final Pokemon currentPokemon = values.get(position);
         holder.txtHeader.setText(currentPokemon.getName());
         holder.txtFooter.setText(currentPokemon.getUrl());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(currentPokemon);
+            }
+        });
 
     }
 

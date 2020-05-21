@@ -1,16 +1,12 @@
 package com.vogella.android.recyclerview.presentation.model.view;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
-import com.squareup.picasso.Picasso;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.vogella.android.recyclerview.R;
 import com.vogella.android.recyclerview.Singletons;
 import com.vogella.android.recyclerview.presentation.model.Pokemon;
@@ -52,10 +48,17 @@ public class MainActivity <recyclerView> extends Activity {
         // of the RecyclerView
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+       layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        Adapter mAdapter = new Adapter(pokemonList);
+
+
+         mAdapter = new Adapter(pokemonList, new Adapter.OnItemClickListener(){
+             @Override
+             public void onItemClick(Pokemon item) {
+                 controller.onItemClick(item);
+             }
+         });
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -68,6 +71,8 @@ public class MainActivity <recyclerView> extends Activity {
         }
 
 
+    public void navigateToDetails(Pokemon pokemon) {
+        Toast.makeText(getApplicationContext(), "TODO NAVIGATE", Toast.LENGTH_SHORT).show();
 
-
+    }
 }
