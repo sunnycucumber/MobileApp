@@ -3,4 +3,6 @@
     <string name="description">Description</string>
     <string name="example_application">Example application</string>
     <string name="todo">TODO</string>
+    <string name="detail_text_description">Ecran Detail</string>
+
 </resources>

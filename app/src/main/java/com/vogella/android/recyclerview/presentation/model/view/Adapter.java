@@ -57,7 +57,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
 
     // Create new views (invoked by the layout manager)
-    @NonNull
+
     @Override
     public Adapter.ViewHolder onCreateViewHolder(
             ViewGroup parent,

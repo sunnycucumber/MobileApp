@@ -1,7 +1,9 @@
 package com.vogella.android.recyclerview.presentation.model.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,7 +43,7 @@ public class MainActivity <recyclerView> extends Activity {
 
 
     public void showList(List<Pokemon> pokemonList) {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         // use this setting to
         // improve performance if you know that changes
         // in content do not change the layout size
@@ -50,7 +52,6 @@ public class MainActivity <recyclerView> extends Activity {
         // use a linear layout manager
        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
 
 
          mAdapter = new Adapter(pokemonList, new Adapter.OnItemClickListener(){
@@ -72,7 +73,12 @@ public class MainActivity <recyclerView> extends Activity {
 
 
     public void navigateToDetails(Pokemon pokemon) {
-        Toast.makeText(getApplicationContext(), "TODO NAVIGATE", Toast.LENGTH_SHORT).show();
+
+        Intent myIntent = new Intent(MainActivity.this, DetailActivity.class);
+        myIntent.putExtra("pokemonKey", Singletons.getGson().toJson(pokemon));
+
+        MainActivity.this.startActivity(myIntent);
+
 
     }
 }
