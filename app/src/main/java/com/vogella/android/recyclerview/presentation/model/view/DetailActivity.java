@@ -31,6 +31,7 @@ public class DetailActivity extends AppCompatActivity {
         Pokemon pokemon = Singletons.getGson().fromJson(pokemonJson, Pokemon.class);
         showDetail(pokemon);
 
+
     }
 
     private void showDetail(Pokemon pokemon) {

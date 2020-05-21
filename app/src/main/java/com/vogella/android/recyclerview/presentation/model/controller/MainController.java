@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vogella.android.recyclerview.Constants;
 import com.vogella.android.recyclerview.Singletons;
+import com.vogella.android.recyclerview.data.PokeCallback;
+import com.vogella.android.recyclerview.data.PokeRepository;
 import com.vogella.android.recyclerview.presentation.model.Pokemon;
 import com.vogella.android.recyclerview.presentation.model.RestPokemonResponse;
 import com.vogella.android.recyclerview.presentation.model.view.MainActivity;
@@ -18,76 +20,31 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainController {
-    private SharedPreferences sharedPreferences;
-    private Gson gson;
+    private final PokeRepository pokeRepository;
     private MainActivity view;
 
-    public MainController(MainActivity mainActivity, Gson gson, SharedPreferences sharedPreferences) {
+    public MainController(MainActivity mainActivity, PokeRepository pokeRepository) {
         this.view = mainActivity;
-        this.gson = gson;
-        this.sharedPreferences = sharedPreferences;
-
+        this.pokeRepository = pokeRepository;
     }
     public void onStart(){
 
-        List<Pokemon> pokemonList = getDataFromCache();
-
-        if( pokemonList != null){
-            view.showList(pokemonList);
-        }else {
-            makeApiCall();
-        }
-    }
-
-    private List<Pokemon> getDataFromCache() {
-        String jsonPokemon = sharedPreferences.getString(Constants.KEY_POKEMON_LIST, null);
-
-        if (jsonPokemon == null){
-            return null;
-        } else {
-            Type listType = new TypeToken<List<Pokemon>>(){}.getType();
-            return gson.fromJson(jsonPokemon, listType);
-        }
-    }
-
-
-    private void makeApiCall(){
-
-
-
-        Call<RestPokemonResponse> call = Singletons.getPokeApi().getPokemonResponse();
-        call.enqueue(new Callback<RestPokemonResponse>() {
+        pokeRepository.getPokemonResponse(new PokeCallback() {
             @Override
-            public void onResponse(Call<RestPokemonResponse> call, Response<RestPokemonResponse> response) {
-                if(response.isSuccessful() && response.body() != null) {
-                    List<Pokemon> pokemonList = response.body().getResults();
-                    saveList(pokemonList);
-                    view.showList(pokemonList);
+            public void onSuccess(List<Pokemon> response) {
+                view.showList(response);
 
-                } else{
-                    view.showError();
-                }
             }
 
             @Override
-            public void onFailure(Call<RestPokemonResponse> call, Throwable t) {
-
+            public void onFailed() {
                 view.showError();
             }
         });
 
+
     }
 
-    private void saveList(List<Pokemon> pokemonList) {
-        String jsonString = gson.toJson(pokemonList);
-
-        sharedPreferences
-                .edit()
-                .putString(Constants.KEY_POKEMON_LIST, jsonString)
-                .apply();
-
-        //Toast.makeText(getApplicationContext(), "List Saved", Toast.LENGTH_SHORT).show();
-    }
 
     public void onItemClick(Pokemon pokemon){
 
@@ -101,5 +58,9 @@ public class MainController {
 
     public void onButtonBClick(){
 
+    }
+
+    public PokeRepository getPokeRepository() {
+        return pokeRepository;
     }
 }
