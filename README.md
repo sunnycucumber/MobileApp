@@ -1,6 +1,6 @@
 # Projet MobileApp
 
-##Présentation du projet:
+## Présentation du projet:
 
 MobileApp est un projet de programmation mobile en java.
 L'application créé sous AndroidStudio affiche une sélection des célèbres créatures venant du jeu/dessin animé Pokémon.
